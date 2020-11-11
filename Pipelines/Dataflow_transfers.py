@@ -8,7 +8,9 @@ from apache_beam.options.pipeline_options import PipelineOptions
 import os
 
 # load the Service Account json file to allow GCP resources to be used
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/Credentials/plenary-keel-288807-a6a2077f0d71.json"
+
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "Credentials/plenary-keel-288807-a6a2077f0d71.json"
 
 class DataIngestion:
 
@@ -34,7 +36,7 @@ def run(argv=None):
         required=False,
         help='Input file to read. This can be a local file or '
         'a file in a Google Storage Bucket.',
-        default='gs://stocks-project-2/full_history/AADR.csv')
+        default='gs://stock_data_test/*.AX.csv')
 
     parser.add_argument('--output',
                         dest='output',
@@ -81,7 +83,7 @@ def run(argv=None):
              write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE)))
     p.run().wait_until_finish()
 
-
+``
 if __name__ == '__main__':
     logging.getLogger().setLevel(logging.INFO)
     run()
